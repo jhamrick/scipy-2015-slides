@@ -37,17 +37,18 @@ env = Environment(ENV=os.environ)
 
 ## Convert example assignment notebook to HTML
 env.Command(
-    "Assignment.html",
-    ["Assignment.ipynb"],
+    "example/Assignment.html",
+    ["example/Assignment.ipynb"],
     " ".join([
         "ipython nbconvert",
         "--to html",
+        "--FilesWriter.build_directory=example",
         "$SOURCE"]))
 
 ## Specify nbconvert target, to generate the slides
 env.Command(
     "scipy-2015.slides.html",
-    ["scipy-2015.ipynb", "reveal.tpl", "hide_input.tpl", "reveal.js", "Assignment.html"],
+    ["scipy-2015.ipynb", "reveal.tpl", "hide_input.tpl", "reveal.js", "example/Assignment.html"],
     " ".join([
         "ipython nbconvert",
         "--RevealHelpTransformer.url_prefix=reveal.js",
@@ -62,7 +63,7 @@ env.Alias("slides", "scipy-2015.slides.html")
 ## for github pages
 env.Command(
     "index.html",
-    ["scipy-2015.slides.html", "images", "custom.css", "reveal.js", "Assignment.html"],
+    ["scipy-2015.slides.html", "images", "custom.css", "reveal.js", "example/Assignment.html"],
     make_gh_pages)
 
 env.Alias("gh-pages", "index.html")
