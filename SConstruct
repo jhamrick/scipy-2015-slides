@@ -14,7 +14,7 @@ def make_gh_pages(target, source, env):
     # checkout the gh-pages branch, and pull in the relevant files
     # from master (e.g. images, stylesheets, etc.)
     call(["git", "checkout", "gh-pages"])
-    call(["git", "checkout", "master", "--"] + sources_names[1:])
+    call(["git", "checkout", "master", "--"] + sources_names[1:-1])
 
     # copy the slides to index.html and update them in the index
     call(["cp", sources_names[0], target_name])
@@ -61,8 +61,8 @@ env.Alias("slides", "scipy-2015.slides.html")
 ## Specify the gh-pages target, to generate the version of the slides
 ## for github pages
 env.Command(
-    "index.html", 
-    ["scipy-2015.slides.html", "images", "custom.css", "reveal.js"], 
+    "index.html",
+    ["scipy-2015.slides.html", "images", "custom.css", "reveal.js", "Assignment.html"],
     make_gh_pages)
 
 env.Alias("gh-pages", "index.html")
