@@ -8,8 +8,8 @@ def call(cmd):
 
 
 def make_gh_pages(target, source, env):
-    target_name, = map(lambda x: x.name, target)
-    sources_names = map(lambda x: x.name, source)
+    target_name, = map(lambda x: x.path, target)
+    sources_names = map(lambda x: x.path, source)
 
     # checkout the gh-pages branch, and pull in the relevant files
     # from master (e.g. images, stylesheets, etc.)
