@@ -14,7 +14,7 @@ def make_gh_pages(target, source, env):
     # checkout the gh-pages branch, and pull in the relevant files
     # from master (e.g. images, stylesheets, etc.)
     call(["git", "checkout", "gh-pages"])
-    call(["git", "checkout", "master", "--"] + sources_names[1:-1])
+    call(["git", "checkout", "master", "--"] + sources_names[1:])
 
     # copy the slides to index.html and update them in the index
     call(["cp", sources_names[0], target_name])
